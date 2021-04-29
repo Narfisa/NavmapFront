@@ -12,18 +12,31 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 
 export const DragabbleMarker = (props) => {    
+    const string = 'Выберите точку ' + (props.point ==='start' ? 'отправления' : 'назначения') + ' передвигая маркер'
     const [position, setPosition] = useState(props.center)
+    const setDrag = props.setDrag
+    const [isDrag, setIsDrag] = useState(props.drag)
     const markerRef = useRef(null)
+
     const eventHandlers = useMemo(
       () => ({
         dragend() {
           const marker = markerRef.current
           if (marker != null) {
             setPosition(marker.getLatLng())
+            setDrag(false)
+            setIsDrag(false)
           }
         },
+        dragstart() {
+            const marker = markerRef.current
+            if (marker != null) {
+              setDrag(true)
+              setIsDrag(true)
+            }
+        },
       }),
-      [],
+      [setDrag],
     )
   
     return (
@@ -33,8 +46,8 @@ export const DragabbleMarker = (props) => {
         position={position}
         ref={markerRef}
         >
-        {props.draggable && <Tooltip direction="top" offset={[0, 0]} opacity={1} permanent>
-            Выберите точку {props.point==='start' ? 'отправления' : 'назначения'} передвигая маркер
+        {!isDrag && <Tooltip direction="top" offset={[0, 0]} opacity={1} permanent>
+            {string}
         </Tooltip> }
       </Marker>
     )
