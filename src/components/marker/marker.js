@@ -24,6 +24,7 @@ export const DragabbleMarker = (props) => {
           const marker = markerRef.current
           if (marker != null) {
             setPosition(marker.getLatLng())
+            props.setCoord(marker.getLatLng())
             setDrag(false)
             setIsDrag(false)
           }
@@ -36,7 +37,7 @@ export const DragabbleMarker = (props) => {
             }
         },
       }),
-      [setDrag],
+      [position], //change to position?
     )
   
     return (
