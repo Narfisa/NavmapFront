@@ -61,10 +61,10 @@ export const Map = () => {
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <DragabbleMarker center={firstMarker} setCoord={setFirstPoint} draggable={true} point={'start'} drag={drag} setDrag={setDrag}/>
+            <DragabbleMarker center={firstMarker} setCoord={setFirstPoint} draggable={!startAccept} point={'start'} drag={drag} setDrag={setDrag}/>
             { !startAccept && dialog && <Dialog open={true} point={'start'} showDialog={showDialog} setAccept={setStartAccept}></Dialog> }
 
-            { startAccept && <DragabbleMarker center={secondMarker} setCoord={setSecondPoint} draggable={true} point={'end'} drag={drag} setDrag={setDrag}/> }
+            { startAccept && <DragabbleMarker center={secondMarker} setCoord={setSecondPoint} draggable={!endAccept} point={'end'} drag={drag} setDrag={setDrag}/> }
             { startAccept && dialog && <Dialog open={true} point={'end'} showDialog={showDialog} setAccept={setEndAccept}></Dialog> }
         </MapContainer>
     </>

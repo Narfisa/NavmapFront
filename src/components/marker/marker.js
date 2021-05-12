@@ -47,7 +47,7 @@ export const DragabbleMarker = (props) => {
         position={position}
         ref={markerRef}
         >
-        {!isDrag && <Tooltip direction="top" offset={[0, 0]} opacity={1} permanent>
+        {!isDrag && props.draggable && <Tooltip direction="top" offset={[0, 0]} opacity={1} permanent>
             {string}
         </Tooltip> }
       </Marker>
